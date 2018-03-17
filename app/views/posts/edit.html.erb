@@ -1,11 +1,21 @@
 <h3>Post Form</h3>
-
-<%= form_tag post_path(@post), method: "put" do %>
+<!-- remove the path argument and the method call since form_for will automatically set these for us.
+ It's smart enough to know that since it's dealing with a pre-existing record you want to utilize PUT over POST. -->
+<!-- < %= form_tag post_path(@post), method: "put" do % > -->
+<%= form_for(@post) do |f| %>
+<!-- The |f| is an iterator variable we can use on the new form object
+  will allow us to dynamically assign form field elements to each of the post data attributes,
+  along with auto filling the values for each field. -->
   <label>Post title:</label><br>
-  <%= text_field_tag :title, @post.title %><br>
-
+  <!-- < %= text_field_tag :title, @post.title % ><br> -->
+  <!-- By passing in the attribute as a symbol e.g. :title
+   automatically tell the form field what model attribute to be associated with. -->
+  <%= f.text_field :title%>
   <label>Post Description</label><br>
-  <%= text_area_tag :description, @post.description %><br>
-  
-  <%= submit_tag "Submit Post" %>
+  <!-- < %= text_area_tag :description, @post.description %><br> -->
+  <%= f.text_field :description%>
+  <!-- < %= submit_tag "Submit Post" %> -->
+  <%= f.submit%>
 <% end %>
+
+Thank you
